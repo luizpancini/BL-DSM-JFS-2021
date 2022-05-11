@@ -17,7 +17,7 @@ for GUD = GUD_init:1:GUD_final
         M = RIB(21);
         k = RIB(22);
         % Nominal alpha_0 and delta_alpha are RIB(8) and RIB(9), but we
-        % shall use the ones gotten from the coefficients data
+        % shall use the ones from the coefficients data
         % Get coefficients data
         GUD_data = importdata(filename_coeffs);    
         time = GUD_data.data(:,1);      % cycle angle (0 -- 2*pi)
