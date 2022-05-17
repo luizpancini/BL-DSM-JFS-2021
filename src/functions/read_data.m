@@ -1,4 +1,4 @@
-function [authors,data,params] = read_data(input)
+function [authors,data,params] = read_data(input,model)
 
 %% Handle input
 if length(input) == 1
@@ -53,8 +53,13 @@ data = {alpha_exp_cl; cl_exp; alpha_exp_cm; cm_exp; alpha_exp_cd; cd_exp; time_e
 U = M*a_inf;        % Airspeed
 beta = sqrt(1-M^2); % Prandtl-Glauert compressibility factor
 
-%% Airfoil parameters 
-params = airfoil_parameters(airfoil,M,U,b);
+%% Airfoil parameters
+switch model
+    case "BL"
+        params = airfoil_parameters(airfoil,M,U,b);
+    case "BLS"
+        params = airfoil_parameters_BLS(airfoil,M,U,b);
+end
 
 %% Set all flow and test condition variables into the params struct
 params.M = M;

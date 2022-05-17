@@ -1,4 +1,4 @@
-function alpha_plotter(alpha,coef,alpha_interp,coef_interp,alpha_exp,coef_exp,alpha_mod,coef_mod,coef_name,coef_short_name,tabgp,authors,frame,GUD,M,k,a_0,a_1,axes_size,lw,ms,xlim_vec,iti)
+function alpha_plotter(alpha,coef,alpha_interp,coef_interp,alpha_exp,coef_exp,alpha_mod,coef_mod,coef_name,coef_short_name,tabgp,model_name,authors,frame,GUD,M,k,a_0,a_1,axes_size,lw,ms,xlim_vec,iti)
 
 tab = uitab('Parent',tabgp,'Title',coef_short_name,'BackgroundColor',[1 1 1]);
 ax = axes('Parent',tab,'FontSize',axes_size,'FontName','times new roman');
@@ -7,23 +7,23 @@ hold(ax,'on');
 if length(authors) == 1 
     if ~isnan(coef_interp(1)) && strcmp(authors{1},'McAlister et al. (1982)')
         plot(alpha(iti:end)*180/pi,coef(iti:end),'k-',alpha_interp*180/pi,coef_interp,'b-','LineWidth',lw,'Parent',ax);
-        legend('Present model',[authors{1}]);
+        legend(model_name,[authors{1}]);
     elseif ~isnan(coef_interp(1)) && strcmp(authors{1},'GU')
         plot(alpha(iti:end)*180/pi,coef(iti:end),'k-',alpha_exp,coef_exp,'ko','LineWidth',lw,'Parent',ax);
-        legend('Present model',authors{1});    
+        legend(model_name,authors{1});    
     elseif isnan(alpha_exp(1)) || isnan(authors{1}(1))
         plot(alpha(iti:end)*180/pi,coef(iti:end),'k-','LineWidth',lw,'Parent',ax);
-        legend('Present model');
+        legend(model_name);
     else
         plot(alpha(iti:end)*180/pi,coef(iti:end),'k-',alpha_exp,coef_exp,'ko','LineWidth',lw,'MarkerSize',ms,'Parent',ax);
-        legend('Present model',authors{1});
+        legend(model_name,authors{1});
     end
 else
     plot(alpha(iti:end)*180/pi,coef(iti:end),'k-',alpha_exp,coef_exp,'ko',alpha_mod,coef_mod,'k--','LineWidth',lw,'MarkerSize',ms,'Parent',ax);
     if isnan(alpha_exp(1))
-        legend('Present model');
+        legend(model_name);
     else
-        legend('Present model',authors{1},authors{2});
+        legend(model_name,authors{1},authors{2});
     end
 end
 xlabel('\alpha [deg]','FontWeight','normal','FontSize',axes_size);
